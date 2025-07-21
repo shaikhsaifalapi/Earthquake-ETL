@@ -1,0 +1,140 @@
+# 🌍 Earthquake Data ETL Pipeline
+
+A simple end-to-end ETL pipeline that extracts real earthquake data from the USGS API, transforms it, and loads it into a PostgreSQL database — built using Python.
+
+---
+
+## 🚀 Project Overview
+
+This project demonstrates the core skills of a Data Engineer:
+
+* 🔄 Extracting real-time JSON data from a public API
+* 🧹 Transforming and cleaning the data
+* 🗃️ Loading structured data into a PostgreSQL database
+
+You’ll learn how to build a lightweight, modular pipeline using Python — and make it job-ready for real-world data sources.
+
+---
+
+## 📦 ETL Process
+
+```bash
+run_pipeline.py
+├── extract_data()   # Fetches past 30 days of M4.5+ earthquakes from USGS
+├── transform_data() # Cleans + structures JSON data
+└── load_data()      # Loads rows into PostgreSQL
+```
+
+---
+
+## 🧪 Sample Data Output
+
+Each earthquake record includes:
+
+| Column      | Type    | Description                                  |
+| ----------- | ------- | -------------------------------------------- |
+| `Date`      | `date`  | UTC timestamp of the event                   |
+| `Place`     | `text`  | Nearby region (e.g. "Nepal-India border")    |
+| `Magnitude` | `float` | Richter scale magnitude                      |
+| `Type`      | `text`  | Type of seismic event (usually `earthquake`) |
+| `Longitude` | `float` | Location (X)                                 |
+| `Latitude`  | `float` | Location (Y)                                 |
+| `Depth_km`  | `float` | Depth of quake below Earth's surface         |
+
+---
+
+## 🛠️ Tech Stack
+
+* **Language**: Python 3.9+
+* **API Source**: [USGS Earthquake API](https://earthquake.usgs.gov/fdsnws/event/1/)
+* **Database**: PostgreSQL (local)
+* **Libraries**: `requests`, `json`, `psycopg2`, `datetime`
+
+---
+
+## 🧰 Project Structure
+
+```
+earthquake-etl/
+│
+├── run_pipeline.py           # Main ETL runner
+├── data/                     # Raw + cleaned data storage
+├── scripts/
+│   ├── extract.py            # Extract: USGS API
+│   ├── transform.py          # Transform: clean/format
+│   └── load.py               # Load: PostgreSQL insert
+└── README.md
+```
+
+---
+
+## ⚙️ How to Run Locally
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/yourusername/earthquake-etl.git
+cd earthquake-etl
+```
+
+### 2. Set up Python environment
+
+```bash
+pip install -r requirements.txt
+```
+
+#### Dependencies (include in `requirements.txt` if not already):
+
+```
+requests
+psycopg2-binary
+```
+
+### 3. Set up PostgreSQL locally
+
+Create a database and user with:
+
+```sql
+CREATE DATABASE earthquake_data;
+CREATE USER postgres WITH ENCRYPTED PASSWORD 'root'; -- change password as needed
+GRANT ALL PRIVILEGES ON DATABASE earthquake_data TO postgres;
+```
+
+Update `load.py` with your DB credentials if needed.
+
+### 4. Run the pipeline
+
+```bash
+python run_pipeline.py
+```
+
+If successful, you’ll see:
+
+```
+✅ Earthquake data extracted and saved
+✅ Transformed 300+ earthquake records
+✅ All earthquake data loaded to PostgreSQL
+```
+
+---
+
+## 📊 Optional Next Steps
+
+* Add Airflow DAG for scheduling the pipeline
+* Visualize data in Streamlit or Power BI
+* Connect PostgreSQL to Metabase for dashboards
+
+---
+
+## ✨ Author
+
+**Saif Shaikh**
+📧 \[Mail: shaikhzsaifal@gmail.com]
+🧠 Built as part of a Data Engineering learning journey
+
+---
+
+## 📄 License
+
+MIT License — feel free to use, fork, or modify.
+
